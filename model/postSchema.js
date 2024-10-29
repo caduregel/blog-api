@@ -1,10 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const { Schema, model } = mongoose;
 
-const commentSchema = new Schema({
-  user: String,
-  message: String,
-});
 
 const postSchema = new Schema({
   title: String,
@@ -13,11 +9,13 @@ const postSchema = new Schema({
   tags: [String],
   createdAt: Date,
   updatedAt: Date,
-  comments: [commentSchema]
+  comments: [{
+    id: String,
+    user: String,
+    message: String,
+    _id: false,
+  }]
 });
 
-
-
-const Comment = model('Comment', commentSchema)
 const Post = model('Post', postSchema);
-module.exports = { Post, Comment }
+module.exports = { Post }
