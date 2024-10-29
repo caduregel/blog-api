@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express');
+const cors = require('cors');
 const indexRouter = require('./routes/indexRouter');
 const { default: mongoose } = require("mongoose");
 const cookieParser = require('cookie-parser');
@@ -15,6 +16,10 @@ mongoose.connect(process.env.DATABASE_CONNECTION_URL).then(() => {
 
 // Middleware functions
 const app = express()
+app.use(cors({
+    origin: 'http://localhost:5173', // replace with your frontend URL
+    credentials: true,              // if your frontend requires cookies for auth
+  }));  
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
