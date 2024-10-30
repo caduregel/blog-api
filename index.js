@@ -14,7 +14,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_URL).then(() => {
     });
     const allowedOrigins = [
         'https://blog-frontend-lime-tau.vercel.app',
-        'https://another-frontend-url.com',
+        'http://localhost:5173',
         'http://localhost:3000', // Example for local development
     ];
 
@@ -28,7 +28,7 @@ app.use(cors({
             const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
             return callback(new Error(msg), false);
         }
-        return callback(null, true);
+        return callback(null, true);},
     credentials: true,              // if your frontend requires cookies for auth
 }));
 app.use(express.urlencoded({ extended: true }))
